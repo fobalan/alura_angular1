@@ -1,0 +1,39 @@
+<div class="page-header text-center">
+    <h3>{{foto.titulo}}</h3>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formulario" ng-submit="submeter()">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Titulo</label>
+            <input type="text" name="titulo" ng-model="foto.titulo" class="form-control" ng-maxlength="20" required>
+            <span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" class="form-control alert-danger">
+                    Numero máximo de carateres é 20
+                </span>
+        </div>
+        <div class="form-group">
+            <label>Url</label>
+            <input type="text" name="url" ng-model="foto.url" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea type="text" name="descricao" ng-model="foto.descricao" class="form-control">
+                </textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Grupo</label>
+            <select name="grupo" class="form-control" required ng-controller="GruposController" ng-model="foto.grupo" ng-options="grupo._id as ( grupo.nome | uppercase ) for grupo in grupos">
+                    <option value="">Selecione um Grupo</option>
+                </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">Salvar</button>
+        <a href="/" class="btn btn-primary" meu-focus>Voltar</a>
+    </div>
+    <div class="col-md-6">
+        <minha-foto titulo={{foto.titulo}} url="{{foto.url}}"></minha-foto>
+    </div>
+</form>
